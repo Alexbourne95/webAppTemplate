@@ -7,12 +7,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
 
     @GetMapping("/")
-    public String home() {
-        return "home"; // This should point to a `home.html` file in the templates folder
+    public String root() {
+        return "redirect:/login";  // Redirect root URL to login page
     }
 
     @GetMapping("/login")
     public String login() {
-        return "login"; // Points to the `login.html`
+        return "login";  // Returns the login.html template
+    }
+
+    @GetMapping("/home")
+    public String home() {
+        return "home";  // Returns the home.html template after login
     }
 }

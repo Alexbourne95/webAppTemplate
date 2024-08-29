@@ -21,15 +21,13 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/", "/home").permitAll()
-                        .anyRequest().authenticated()
+                        .anyRequest().authenticated()  // All requests require authentication
                 )
                 .formLogin((form) -> form
-                        .loginPage("/login")
-                        .permitAll()
+                        .loginPage("/login")  // Specify your custom login page
+                        .permitAll()  // Allow everyone to see the login page
                 )
-                .logout((logout) -> logout.permitAll())
-                .userDetailsService(userDetailsService);  // Use your custom UserDetailsService
+                .logout((logout) -> logout.permitAll());
 
         return http.build();
     }

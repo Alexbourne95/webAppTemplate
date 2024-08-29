@@ -1,7 +1,6 @@
 package dev.abp.webAppTemplate.controller;
 
 import dev.abp.webAppTemplate.dto.Users;
-import dev.abp.webAppTemplate.service.UsersDetailService;
 import dev.abp.webAppTemplate.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
