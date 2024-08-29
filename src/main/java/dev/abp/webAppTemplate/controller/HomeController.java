@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
 
     @GetMapping("/")
-    public String root() {
-        return "redirect:/login";  // Redirect root URL to login page
+    public String landing() {
+        return "landing";  // Returns the landing.html template
     }
 
     @GetMapping("/login")

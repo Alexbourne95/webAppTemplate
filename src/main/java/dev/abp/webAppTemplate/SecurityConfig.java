@@ -11,21 +11,21 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
-    private final UserDetailsService userDetailsService;
-
     public SecurityConfig(UserDetailsService userDetailsService) {
-        this.userDetailsService = userDetailsService;
     }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .anyRequest().authenticated()  // All requests require authentication
+                        .requestMatchers("/", "/signup", "/login", "/css/**").permitAll()
+                        .requestMatchers("/admin/**").hasRole("ADMIN")  // Only admins can access /admin
+                        .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
-                        .loginPage("/login")  // Specify your custom login page
-                        .permitAll()  // Allow everyone to see the login page
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/home", true)
+                        .permitAll()
                 )
                 .logout((logout) -> logout.permitAll());
 

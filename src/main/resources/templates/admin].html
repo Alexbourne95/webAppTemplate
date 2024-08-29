@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin - Manage Roles</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+</head>
+<body>
+<div class="container">
+    <h2>Manage User Roles</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Username</th>
+            <th>Role</th>
+            <th>Change Role</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.role}"></td>
+            <td>
+                <form th:action="@{/admin/changeRole}" method="post">
+                    <input type="hidden" name="username" th:value="${user.username}" />
+                    <select name="role">
+                        <option value="ROLE_USER" th:selected="${user.role == 'ROLE_USER'}">ROLE_USER</option>
+                        <option value="ROLE_ADMIN" th:selected="${user.role == 'ROLE_ADMIN'}">ROLE_ADMIN</option>
+                    </select>
+                    <button type="submit">Update Role</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

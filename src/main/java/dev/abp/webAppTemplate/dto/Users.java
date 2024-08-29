@@ -21,4 +21,8 @@ public class Users {
     private String password; //Hashed
     private ArrayList<String> roles;
     private String created_at;
+
+    public void setRoles(String roleUser) {
+
+    }
 }
