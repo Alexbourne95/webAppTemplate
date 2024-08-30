@@ -33,19 +33,21 @@ public class SignupController {
                          @RequestParam String email,
                          RedirectAttributes redirectAttributes) {
 
+        String s = "redirect:/signup";
+
         if (!password.equals(confirmPassword)) {
-            redirectAttributes.addFlashAttribute("error", "Passwords do not match.");
-            return "redirect:/signup";
+            redirectAttributes.addFlashAttribute("passwordError", "Passwords do not match.");
+            return s;
         }
 
         if (usersRepository.findUserByUsername(username).isPresent()) {
-            redirectAttributes.addFlashAttribute("error", "Username already taken.");
-            return "redirect:/signup";
+            redirectAttributes.addFlashAttribute("usernameError", "Username already taken.");
+            return s;
         }
 
         if (usersRepository.findUserByEmail(email).isPresent()) {
-            redirectAttributes.addFlashAttribute("error", "Email already registered.");
-            return "redirect:/signup";
+            redirectAttributes.addFlashAttribute("emailError", "Email already registered.");
+            return s;
         }
 
         Users newUser = new Users();
