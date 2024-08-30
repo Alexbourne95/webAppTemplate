@@ -8,6 +8,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Document(collection = "Users")
 @Data
@@ -22,7 +23,11 @@ public class Users {
     private ArrayList<String> roles;
     private String created_at;
 
-    public void setRoles(String roleUser) {
+    public List<String> getRoles() {
+        return roles;
+    }
 
+    public void setRoles(List<String> roles) {
+        this.roles = (ArrayList<String>) roles;
     }
 }

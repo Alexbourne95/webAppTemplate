@@ -19,7 +19,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/", "/signup", "/login", "/css/**").permitAll()
-                        .requestMatchers("/admin/**").hasRole("ADMIN")  // Only admins can access /admin
+                        .requestMatchers("/admin/**").hasRole("ADMIN")  // Check if user has "ADMIN" role
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
@@ -34,6 +34,6 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();  // BCryptPasswordEncoder for password hashing
+        return new BCryptPasswordEncoder();
     }
 }

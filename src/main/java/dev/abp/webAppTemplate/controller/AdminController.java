@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Collections;
+
 @Controller
 @PreAuthorize("hasRole('ROLE_ADMIN')")  // Ensure only admins can access these endpoints
 public class AdminController {
@@ -25,7 +27,7 @@ public class AdminController {
     @PostMapping("/admin/changeRole")
     public String changeUserRole(@RequestParam String username, @RequestParam String role) {
         usersRepository.findUserByUsername(username).ifPresent(user -> {
-            user.setRoles(role);
+            user.setRoles(Collections.singletonList(role));
             usersRepository.save(user);
         });
         return "redirect:/admin";
